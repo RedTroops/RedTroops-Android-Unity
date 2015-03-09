@@ -10,37 +10,25 @@
             <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
             <meta-data android:name="unityplayer.ForwardNativeEventsToDalvik" android:value="false" />
         </activity>
-
+        
         <!-- RedTroops SDK (MANDATORY) -->
         <activity
-            android:name="com.RedTroops.RedTroopsSDK.Interstitial"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize"
-            android:excludeFromRecents="true"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
-
-        <!-- GCM Receiver for RedTroops SDK -->
-        <receiver
-            android:name="com.RedTroops.RedTroopsSDK.gcm.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND" >
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-
-                <category android:name="com.RedTroops.UnityTest" />
-            </intent-filter>
-        </receiver>
-
+        android:name="com.RedTroops.RedTroopsSDK.Interstitial"
+        android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize"
+        android:excludeFromRecents="true"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
         <service android:name="com.RedTroops.RedTroopsSDK.gcm.GcmIntentService" />
-
-        <!-- Install Referrer -->
         <receiver
-            android:name="com.RedTroops.RedTroopsSDK.ReferrerReceiver"
+            android:name="com.RedTroops.RedTroopsSDK.RedTroopsReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND"
             android:exported="true" >
             <intent-filter>
-                <action android:name="com.android.vending.INSTALL_REFERRER" >
-                </action>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+                <action android:name="com.RedTroops.RECEIVED_PUSH" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.RedTroops.RedTroopsSDK.Test" />
             </intent-filter>
         </receiver>
-
         <meta-data android:name="api_key" android:value="cd370a58085bf3e8c8c764fd7e985015"/>
         <meta-data android:name="gcm_sender_id" android:value="gcm330435028307"/>
         <!-- End of RedTroops SDK (MANDATORY) -->
